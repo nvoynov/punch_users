@@ -1,0 +1,45 @@
+Looking though 'lib', 'test' directories..
+
+- 34 sources, 29 "punched" (28 remain "punched")
+- 664 SLOC, 91 blank and 243 comment lines
+
+'lib' summary:
+- 17 sources, 13 "punched" (12 remain "punched")
+- 329 SLOC, with 53 blank lines and 93 comments
+
+remain "punched":
+- lib/domain.rb
+- lib/users/entities/secret.rb
+- lib/users/entities/user.rb
+- lib/users/plugins/secrets.rb
+- lib/users/plugins/storage.rb
+- lib/users/services/admin_lock_user.rb
+- lib/users/services/admin_query_users.rb
+- lib/users/services/admin_unlock_user.rb
+- lib/users/services/user_change_password.rb
+- lib/users/services/user_resign.rb
+- lib/users/services/user_sign_in.rb
+- lib/users/services/user_sign_up.rb
+
+'test' summary:
+- 17 sources, 16 "punched" (16 remain "punched")
+- 335 SLOC, with 38 blank lines and 150 comments
+
+remain "punched":
+- test/users/entities/test_secret.rb
+- test/users/entities/test_user.rb
+- test/users/plugins/test_secrets.rb
+- test/users/plugins/test_storage.rb
+- test/users/sentries/test_email.rb
+- test/users/sentries/test_limit.rb
+- test/users/sentries/test_offset.rb
+- test/users/sentries/test_password.rb
+- test/users/sentries/test_secret.rb
+- test/users/services/test_admin_lock_user.rb
+- test/users/services/test_admin_query_users.rb
+- test/users/services/test_admin_unlock_user.rb
+- test/users/services/test_user_change_password.rb
+- test/users/services/test_user_resign.rb
+- test/users/services/test_user_sign_in.rb
+- test/users/services/test_user_sign_up.rb
+
