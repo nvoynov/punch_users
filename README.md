@@ -1,80 +1,10 @@
 % Punch Users
 
-# TODO
+This is [Punch](https://github.com/nvoynov/punch) Demo for Punch::DSL.
 
-- copy .punch/domain/README.md to Punch
-- refresh Punch/README.md config section
+All code in the repository was "punched" mainly by executing `.punch/domain/dogen.rb`, then some entities and tests were created manually.
 
-# Overview
-
-Punch User project serves as demo for applying [Punch](TODO) and describes my steps during punching.   
-
-
-# Create project
-
-```
-$ punch new punch_users
-$ cd punch_users
-$ bundle install
-$ punch domain
-```
-
-# Configure
-
-See [punch domain README](.punch/domain/README.md) for possible options.
-
-I decided to punch `.punch/domain/sample.rb` and want to have `Users` namespace, so I configured it as follows
-
-```yml
-lib: lib
-test: test
-sentries: users/sentries
-entities: users/entities
-services: users/services
-plugins: users/plugins
-```
-
-# Generate
-
-Then I modified `.punch/domain/dogen.rb`, requiring "sample" instead of "domain" and calling `build_sample_domain`, and got the following output
-
-```
-Punching Domain Skeleton..
-- punching sentries..
-- punching entities..
-- punching services..
-- punching plugins..
-Success!
-- lib/config.rb
-- lib/domain.rb
-- lib/users/entities/secret.rb
-- lib/users/entities/user.rb
-- lib/users/entities.rb
-- lib/users/plugins/secrets.rb
-- lib/users/plugins/storage.rb
-- lib/users/plugins.rb
-- lib/users/sentries.rb
-- lib/users/services/admin_lock_user.rb
-...
-```
-
-At the moment of Punch v0.6.0 punching domains have two issues not elaborated yet but fortunately they can be quickly fixed manually.
-
-`lib/domain.rb` should be named as `lib/users.rb`, but Punch v0.6.0 does not have settings for domain name. It is just inclusion file like `lib/<gemname>.rb`.
-
-`lib/config.rb` maybe should be placed under `users` folder, however, I haven't come to a final decision yet. Besides there is a bug, that should be fixed at the time you might read this text.
-
-```ruby
-require_relative "users/plugins"
-include Users/plugins
-
-StorageHolder = Storage.plugin
-SecretsHolder = Secrets.plugin
-```
-
-# Status
-
-It's interesting to get the first status by `$ punch status` and see how many files and SLOC was actually punched. I confess, there are a lot of comments in services tests..
+The first `$ punch status` was as follows, although it might be different if you try to re-puch, because it was initially punched with Punch < 0.6.0. See full status in [status_1.txt](status_1.txt) 
 
 ```
 Looking though 'lib', 'test' directories..
@@ -99,5 +29,3 @@ remain "punched":
 - test/users/entities/test_secret.rb
 ..
 ```
-
-# Git 1

@@ -5,18 +5,18 @@ require_relative "../basics"
 
 module Users
   module Entities
-    # 
+    #
     class Secret < Entity
-      # @return [Email] 
+      # @return [Email]
       attr_reader :email
-      
-      # @return [Secret] 
+
+      # @return [Secret]
       attr_reader :secret
 
       def initialize(id: nil, email:, secret:)
         super(id)
         @email = MustbeEmail.(email)
-        @secret = MustbeSecret.(secret)
+        @secret = secret
       end
     end
 

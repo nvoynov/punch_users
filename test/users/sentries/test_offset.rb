@@ -3,9 +3,8 @@
 require_relative "../../test_helper"
 
 describe MustbeOffset do
-  # @todo provide valid and wrong samples
-  let(:proper) { [nil, -1, 0, 1, "", "string", Object.new] }
-  let(:faulty) { [nil, -1, 0, 1, "", "string", Object.new] }
+  let(:proper) { [0, 1, 2, 100] }
+  let(:faulty) { [nil, -1, "string", Object.new] }
 
   it 'must return proper arguments' do
     proper.each{|arg| assert_equal arg, MustbeOffset.(arg) }

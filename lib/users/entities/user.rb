@@ -5,24 +5,24 @@ require_relative "../basics"
 
 module Users
   module Entities
-    # 
+    #
     class User < Entity
-      # @return [Email] 
+      # @return [Email]
       attr_reader :email
-      
-      # @return [Object] 
+
+      # @return [Object]
       attr_reader :signed_at
-      
-      # @return [Object] 
+
+      # @return [Object]
       attr_reader :locked_at
-      
-      # @return [Object] 
+
+      # @return [Object]
       attr_reader :locked_by
-      
-      # @return [Object] 
+
+      # @return [Object]
       attr_reader :resigned_at
 
-      def initialize(id: nil, email:, signed_at:, locked_at:, locked_by:, resigned_at:)
+      def initialize(id: nil, email:, signed_at:, locked_at: nil, locked_by: nil, resigned_at: nil)
         super(id)
         @email = MustbeEmail.(email)
         @signed_at = signed_at

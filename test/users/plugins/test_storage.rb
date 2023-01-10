@@ -3,6 +3,9 @@
 require_relative "../../test_helper"
 include Users::Plugins
 
+# @todo Storage just interface without implementation
+#   so maybe there is some sense to create some basic
+#   test module that will test future implementations
 class TestStorage < Minitest::Test
   def plugin
     Storage.new()

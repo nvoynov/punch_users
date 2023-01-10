@@ -3,9 +3,8 @@
 require_relative "../../test_helper"
 
 describe MustbeEmail do
-  # @todo provide valid and wrong samples
-  let(:proper) { [nil, -1, 0, 1, "", "string", Object.new] }
-  let(:faulty) { [nil, -1, 0, 1, "", "string", Object.new] }
+  let(:proper) { ["a@b.c", "user@example.com", "joe.dep@co.com.ua"] }
+  let(:faulty) { [nil, 1, Object.new, "@b.c", "a@b"] }
 
   it 'must return proper arguments' do
     proper.each{|arg| assert_equal arg, MustbeEmail.(arg) }

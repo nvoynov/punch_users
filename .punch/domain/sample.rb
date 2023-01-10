@@ -18,7 +18,7 @@ def build_sample_domain
 
     entity :secret do
       param :email, :sentry => :email
-      param :secret, :sentry => :secret
+      param :secret
     end
 
     # can't see a real thing without plugins

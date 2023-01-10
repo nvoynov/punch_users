@@ -4,7 +4,7 @@ require_relative "../../test_helper"
 include Users::Entities
 
 describe Secret do
-  let(:entity) { Secret.new(email:, secret:) }
+  let(:entity) { Secret.new(email: "john@co.com", secret: '') }
 
   it 'must do something' do
     assert entity

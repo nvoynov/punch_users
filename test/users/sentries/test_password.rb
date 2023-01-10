@@ -3,9 +3,8 @@
 require_relative "../../test_helper"
 
 describe MustbePassword do
-  # @todo provide valid and wrong samples
-  let(:proper) { [nil, -1, 0, 1, "", "string", Object.new] }
-  let(:faulty) { [nil, -1, 0, 1, "", "string", Object.new] }
+  let(:proper) { ["querty12", "pa$$w0rd"] }
+  let(:faulty) { [nil, 0, Object.new, "querty", "long string"] }
 
   it 'must return proper arguments' do
     proper.each{|arg| assert_equal arg, MustbePassword.(arg) }

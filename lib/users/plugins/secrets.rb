@@ -2,15 +2,16 @@
 # see https://github.com/nvoynov/punch
 # frozen_string_literal: true
 require_relative "../basics"
+require "digest"
 
 module Users
   module Plugins
-    # 
+    #
     class Secrets
       extend Plugin
 
-      def initialize()
-
+      def secret(string)
+        Digest::MD5.hexdigest(string)
       end
     end
 

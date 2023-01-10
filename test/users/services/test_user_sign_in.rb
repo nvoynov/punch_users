@@ -1,28 +1,43 @@
 # MD5 a84ec662efc3c42cb4c0a526c96e0163
 # see https://github.com/nvoynov/punch
 require_relative "../../test_helper"
+require_relative "../data_helper"
 include Users::Services
 
 describe UserSignIn do
-  let(:service) { UserSignIn }
-  let(:payload) { {email: @email, password: @password} }
+  let(:service)  { UserSignIn }
+  let(:storage)  { StorageHolder.object }
+  let(:password) { "pa$$w0rd" }
+  let(:payload)  { {email: john.email, password: password} }
+  let(:secret)   { Secret.new(email: john.email,
+      secret: SecretsHolder.object.secret(password))
+  }
+  let(:faulty_email)  { "unknow@co.com" }
+  let(:faulty_secret) { Secret.new(email: john.email,
+      secret: SecretsHolder.object.secret("wr0ngpa$$w0rd"))
+  }
 
-  it 'must #call' do
-    # assumed that there are no plugins implementations at the stage
-    # so instead of just "assert service.(**payload)", plugins should
-    # be mocked, or maybe stubbed for only one plugin an one method
-    #
-    # PluginHolder.object.stub :get, dummy do
-    #   result = service.(**payload)
-    #   assert_equal dummy, result
-    # end#
-    #
-    # @mock = Minitest::Mock.new
-    # @mock.expect :get, dummy, [User], **payload
-    # @mock.expect :put, dummy, [User]
-    # PluginHolder.stub :object, @mock do
-    #   result = service.(**payload)
-    #   assert_equal dummy, result
-    # end
+  it 'must return user' do
+    @mock = Minitest::Mock.new
+    @mock.expect :get, john, [User], **{email: john.email}
+    @mock.expect :get, secret, [Secret], **{email: john.email}
+    StorageHolder.stub :object, @mock do
+      assert service.(**payload)
+    end
+  end
+
+  it 'must fail for faulty email' do
+    storage.stub :get, nil do
+      assert_raises(Service::Failure) { service.(**payload) }
+    end
+  end
+
+  it 'must fail for faulty password' do
+    @mock = Minitest::Mock.new
+    @mock.expect :get, john, [User], **{email: john.email}
+    @mock.expect :get, faulty_secret, [Secret], **{email: john.email}
+    StorageHolder.stub :object, @mock do
+      assert_raises(Service::Failure) { service.(**payload) }
+    end
   end
 end
