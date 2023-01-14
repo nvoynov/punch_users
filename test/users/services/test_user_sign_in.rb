@@ -19,23 +19,23 @@ describe UserSignIn do
 
   it 'must return user' do
     @mock = Minitest::Mock.new
-    @mock.expect :get, john, [User], **{email: john.email}
-    @mock.expect :get, secret, [Secret], **{email: john.email}
+    @mock.expect :find, john, [User], **{email: john.email}
+    @mock.expect :find, secret, [Secret], **{email: john.email}
     StorageHolder.stub :object, @mock do
       assert service.(**payload)
     end
   end
 
   it 'must fail for faulty email' do
-    storage.stub :get, nil do
-      assert_raises(Service::Failure) { service.(**payload) }
+    storage.stub :find, nil do
+      assert_raises(UserSignIn::Failure) { service.(**payload) }
     end
   end
 
   it 'must fail for faulty password' do
     @mock = Minitest::Mock.new
-    @mock.expect :get, john, [User], **{email: john.email}
-    @mock.expect :get, faulty_secret, [Secret], **{email: john.email}
+    @mock.expect :find, john, [User], **{email: john.email}
+    @mock.expect :find, faulty_secret, [Secret], **{email: john.email}
     StorageHolder.stub :object, @mock do
       assert_raises(Service::Failure) { service.(**payload) }
     end

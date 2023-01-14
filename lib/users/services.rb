@@ -1,3 +1,4 @@
+require_relative "services/service"
 require_relative "services/user_sign_up"
 require_relative "services/user_sign_in"
 require_relative "services/user_change_password"

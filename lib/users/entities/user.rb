@@ -30,6 +30,10 @@ module Users
         @locked_by = locked_by
         @resigned_at = resigned_at
       end
+
+      def locked?
+        !locked_at.nil?
+      end
     end
 
   end

@@ -11,8 +11,9 @@ describe UserSignUp do
 
   it 'must return user' do
     @mock = Minitest::Mock.new
-    @mock.expect :get, nil,  [User], **{email: john.email}
-    @mock.expect :put, john, [User, Secret]
+    @mock.expect :find, nil,  [User], **{email: john.email}
+    @mock.expect :put,  nil,  [Secret]
+    @mock.expect :put,  john, [User]
     StorageHolder.stub :object, @mock do
       assert service.(**payload)
     end
@@ -20,7 +21,7 @@ describe UserSignUp do
 
   it 'must fail when email exists' do
     storage = StorageHolder.object
-    storage.stub :get, john do
+    storage.stub :find, john do
       assert_raises(Service::Failure) { service.(**payload) }
     end
   end

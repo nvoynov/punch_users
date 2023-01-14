@@ -7,4 +7,19 @@ require_relative "basics/service.rb"
 Sentry = Punch::Sentry
 Entity = Punch::Entity
 Plugin = Punch::Plugin
-Service = Punch::Service
+
+module CloneWith
+  def clone_with(**params)
+    faulty = params.keys.reject{|k| self.respond_to?(k)}
+    fail ArgumentError, "unknown keys: #{faulty}" if faulty.any?
+    self.clone.tap{|klone|
+      params.each{|key, val|
+        klone.instance_variable_set("@#{key}".to_sym, val)
+      }
+    }
+  end
+end
+
+class Entity
+  include CloneWith
+end

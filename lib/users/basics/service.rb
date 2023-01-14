@@ -50,7 +50,7 @@ module Punch
     protected
 
     def failure(message)
-      fail Failure, message
+      fail self.class::Failure, message
     end
 
   end

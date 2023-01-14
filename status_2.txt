@@ -1,0 +1,16 @@
+Looking though 'lib', 'test' directories..
+
+- 40 sources, 28 "punched" (1 remain "punched")
+- 1020 SLOC, 148 blank and 220 comment lines
+
+'lib' summary:
+- 23 sources, 13 "punched" (0 remain "punched")
+- 657 SLOC, with 102 blank lines and 175 comments
+
+'test' summary:
+- 17 sources, 15 "punched" (1 remain "punched")
+- 363 SLOC, with 46 blank lines and 45 comments
+
+remain "punched":
+- test/users/plugins/test_secrets.rb
+

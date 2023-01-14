@@ -1,11 +1,11 @@
 # MD5 39f5e917c00483dd3cb90275d7960e0b
 # see https://github.com/nvoynov/punch
 # frozen_string_literal: true
-require_relative "../basics"
+require_relative "service"
 
 module Users
   module Services
-    # 
+    #
     class AdminQueryUsers < Service
 
       def initialize(limit:, offset:)
@@ -14,11 +14,7 @@ module Users
       end
 
       def call
-        # user = storage.get(User, email: @email)
-        # failure("Email already exists") if user
-        # user = User.new(limit: @limit, offset: @offset)
-        # storage.put(user)
-        failure("UNDER CONSTRUCTION")
+        storage.q(User, limit: @limit, offset: @offset)
       end
     end
 
